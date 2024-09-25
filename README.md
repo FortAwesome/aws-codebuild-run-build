@@ -79,7 +79,7 @@ The only required input is `project-name`.
 1. **source-type-override** (optional) :
    The source type that overrides the `sourceTypeOverride` provided to Codebuild.
 1. **source-location-override** (optional) :
-    The source location that overrides the `sourceLocationOverride` provided to Codebuild.
+   The source location that overrides the `sourceLocationOverride` provided to Codebuild.
 1. **env-vars-for-codebuild** (optional) :
    A comma-separated list of the names of environment variables
    that the action passes from GitHub Actions to CodeBuild.

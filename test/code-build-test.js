@@ -430,7 +430,9 @@ describe("inputs2Parameters", () => {
       sourceLocationOverride: "bucket-name/object-name",
     });
     expect(test).to.haveOwnProperty("sourceTypeOverride").and.to.equal("S3");
-    expect(test).to.haveOwnProperty("sourceLocationOverride").and.to.equal("bucket-name/object-name");
+    expect(test)
+      .to.haveOwnProperty("sourceLocationOverride")
+      .and.to.equal("bucket-name/object-name");
     expect(test).to.not.haveOwnProperty("sourceVersion");
   });
 

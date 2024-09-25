@@ -34,6 +34,9 @@ inputs:
   disable-source-override:
     description: 'Set to `true` if you want do disable source repo override'
     required: false
+  debug-session-enabled:
+    description: 'Set to `true` if you want debugging enabled using Session Manager'
+    required: false
   source-version-override:
     description: 'The source version that overrides the sourceVersion provided to Codebuild.'
     required: false

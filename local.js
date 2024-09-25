@@ -60,6 +60,11 @@ const {
     describe: "List of environment variables to send to CodeBuild",
     type: "array",
   })
+  .option("debug-session-enabled", {
+    alias: "d",
+    describe: "Enabled session debugging with Session Manager in CodeBuild",
+    type: "string",
+  })
   .option("remote", {
     alias: "r",
     describe: "remote name to publish to",

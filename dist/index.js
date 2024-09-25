@@ -205,15 +205,15 @@ function githubInputs() {
   // the GITHUB_SHA value is NOT the correct value.
   // See: https://github.com/aws-actions/aws-codebuild-run-build/issues/36
   const sourceVersion =
-    core.getInput("source-version-override", { required: false }) || 
+    core.getInput("source-version-override", { required: false }) ||
     (process.env[`GITHUB_EVENT_NAME`] === "pull_request"
       ? (((payload || {}).pull_request || {}).head || {}).sha
       : process.env[`GITHUB_SHA`]);
 
   assert(sourceVersion, "No source version could be evaluated.");
 
-  const sourceTypeOverride = 
-    core.getInput("source-type-override", { required: false, }) || undefined;
+  const sourceTypeOverride =
+    core.getInput("source-type-override", { required: false }) || undefined;
 
   const sourceLocationOverride =
     core.getInput("source-location-override", { required: false }) || undefined;
@@ -262,6 +262,9 @@ function githubInputs() {
   const artifactsTypeOverride =
     core.getInput("artifacts-type-override", { required: false }) || undefined;
 
+  const debugSessionEnabled =
+    core.getInput("debug-session-enabled", { required: false }) === "true";
+
   const stopOnSignals = core
     .getInput("stop-on-signals", { required: false })
     .split(",")
@@ -287,6 +290,7 @@ function githubInputs() {
     hideCloudWatchLogs,
     disableGithubEnvVars,
     artifactsTypeOverride,
+    debugSessionEnabled,
     stopOnSignals,
   };
 }
@@ -307,6 +311,7 @@ function inputs2Parameters(inputs) {
     envPassthrough = [],
     disableSourceOverride,
     disableGithubEnvVars,
+    debugSessionEnabled,
     artifactsTypeOverride,
   } = inputs;
 
@@ -315,9 +320,10 @@ function inputs2Parameters(inputs) {
         // sourceVersion should not be set when using sourceTypeOverride or sourceLocationOverride
         ...(sourceTypeOverride || sourceLocationOverride
           ? {}
-          : {sourceVersion}),
+          : { sourceVersion }),
         sourceTypeOverride: sourceTypeOverride || "GITHUB",
-        sourceLocationOverride: sourceLocationOverride || `https://github.com/${owner}/${repo}.git`,
+        sourceLocationOverride:
+          sourceLocationOverride || `https://github.com/${owner}/${repo}.git`,
       }
     : {};
 
@@ -349,6 +355,7 @@ function inputs2Parameters(inputs) {
     imageOverride,
     imagePullCredentialsTypeOverride,
     environmentVariablesOverride,
+    debugSessionEnabled
   };
 }
 
